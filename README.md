@@ -1,364 +1,351 @@
-# Git Test
 
 
-## This is about testing Git
+# 🧰 Git Complete Cheatsheet
 
-
-GIT COMPLETE CHEATSHEET
-From project start to pull request and daily workflows
+From project setup to pull requests and daily workflows.
 
 ---
 
-1. SETUP AND CONFIG
+## 1. Setup & Configuration
 
----
+### Set User Identity
 
-Install identity
+```bash
 git config --global user.name "Your Name"
-git config --global user.email "[you@example.com](mailto:you@example.com)"
+git config --global user.email "you@example.com"
+```
 
-Default editor
+### Default Editor
+
+```bash
 git config --global core.editor "vim"
+```
 
-Check config
+### Check Configuration
+
+```bash
 git config --list
+```
 
-Line endings
+### Line Endings (macOS / Linux)
+
+```bash
 git config --global core.autocrlf input
+```
 
 ---
 
-2. STARTING A REPOSITORY
+## 2. Starting a Repository
 
----
+### Initialize Repository
 
-Create new repo
+```bash
 git init
+```
 
-Clone existing repo
+### Clone Repository
+
+```bash
 git clone <url>
 git clone <url> folder_name
+```
 
-Check repo status
+### Repository Status
+
+```bash
 git status
+```
 
 ---
 
-3. BASIC WORKFLOW
+## 3. Basic Workflow
 
----
+### Stage Files
 
-Add files to staging
+```bash
 git add file.txt
 git add .
 git add src/
+```
 
-Commit changes
-git commit -m "message"
+### Commit Changes
 
-Add and commit together
-git commit -am "message"
+```bash
+git commit -m "commit message"
+```
 
-View history
+### Add & Commit Together
+
+```bash
+git commit -am "commit message"
+```
+
+### View History
+
+```bash
 git log
 git log --oneline
 git log --graph --oneline
+```
 
 ---
 
-4. STAGING AND UNDO
+## 4. Staging & Undo
 
----
+### Unstage Files
 
-Unstage files
+```bash
 git restore --staged .
 git restore --staged file.txt
+```
 
-Discard local changes
-git restore file.txt
+### Discard Changes
+
+```bash
 git restore .
+git restore file.txt
+```
 
-Reset last commit but keep files
+### Reset Commits
+
+```bash
 git reset --soft HEAD~1
-
-Reset last commit and unstage files
 git reset HEAD~1
-
-Hard reset and delete changes
 git reset --hard HEAD~1
+```
 
-Remove file from tracking only
+### Remove File From Tracking
+
+```bash
 git rm --cached file.txt
+```
 
 ---
 
-5. BRANCHING
+## 5. Branching
 
----
+### Create Branch
 
-Create branch
+```bash
 git branch feature
-
-Switch branch
-git switch feature
-
-Create and switch
 git switch -c feature
+```
 
-Old style switch
+### Switch Branch
+
+```bash
+git switch feature
 git checkout feature
+```
 
-List branches
+### List Branches
+
+```bash
 git branch
 git branch -a
+```
 
-Delete branch
+### Delete Branch
+
+```bash
 git branch -d feature
 git branch -D feature
+```
 
-Rename branch
+### Rename Branch
+
+```bash
 git branch -m new_name
+```
 
 ---
 
-6. MERGING
+## 6. Merging
 
----
-
-Merge branch into current
+```bash
 git merge feature
-
-Abort merge
 git merge --abort
-
-Fast forward merge
 git merge --ff feature
-
-No fast forward merge
 git merge --no-ff feature
+```
 
 ---
 
-7. REBASE
+## 7. Rebase
 
----
-
-Rebase current on main
+```bash
 git rebase main
-
-Interactive rebase
 git rebase -i HEAD~3
-
-Abort rebase
 git rebase --abort
-
-Continue rebase
 git rebase --continue
+```
 
 ---
 
-8. REMOTE WORK
+## 8. Remote Repositories
 
----
+### Add Remote
 
-Add remote
+```bash
 git remote add origin <url>
+```
 
-View remotes
+### View Remotes
+
+```bash
 git remote -v
+```
 
-Push first time
+### Push
+
+```bash
 git push -u origin main
-
-Normal push
 git push
+```
 
-Pull changes
+### Pull & Fetch
+
+```bash
 git pull
 git pull origin main
-
-Fetch only
 git fetch
+```
 
 ---
 
-9. STASH
+## 9. Stash
 
----
-
-Save work
+```bash
 git stash
-
-List stashes
 git stash list
-
-Apply stash
 git stash apply
-
-Pop stash
 git stash pop
-
-Clear stashes
 git stash clear
+```
 
 ---
 
-10. TAGS
+## 10. Tags
 
----
-
-Create tag
+```bash
 git tag v1.0
-
-Annotated tag
 git tag -a v1.0 -m "version 1.0"
-
-Push tags
 git push --tags
+```
 
 ---
 
-11. INSPECTING
+## 11. Inspecting
 
----
-
-Show changes
+```bash
 git diff
 git diff --staged
-
-Show commit
-git show <hash>
-
-File history
+git show <commit_hash>
 git log file.txt
-
-Who changed lines
 git blame file.txt
+```
 
 ---
 
-12. IGNORE FILES
+## 12. Ignoring Files
 
----
+### Create `.gitignore`
 
-Create ignore file
+```bash
 touch .gitignore
+```
 
-Example entries
+### Common Rules
+
+```gitignore
 node_modules/
 .env
 *.log
 dist/
+```
 
 ---
 
-13. PULL REQUEST FLOW
+## 13. Pull Request Workflow
 
----
-
-Typical workflow
-
-1. Update main
-   git switch main
-   git pull
-
-2. Create feature branch
-   git switch -c feature/login
-
-3. Work and commit
-   git add .
-   git commit -m "add login"
-
-4. Push branch
-   git push -u origin feature/login
-
-5. Open pull request on platform
-
-6. After approval
-   git switch main
-   git pull
-   git branch -d feature/login
-
----
-
-14. FIXING MISTAKES
-
----
-
-Change last commit message
-git commit --amend -m "new message"
-
-Add file to last commit
-git add file
-git commit --amend --no-edit
-
-Revert commit
-git revert <hash>
-
----
-
-15. COMMON DAILY FLOW
-
----
-
-Start day
+```bash
+git switch main
 git pull
 
-Work cycle
+git switch -c feature/login
+git add .
+git commit -m "add login"
+git push -u origin feature/login
+```
+
+After approval:
+
+```bash
+git switch main
+git pull
+git branch -d feature/login
+```
+
+---
+
+## 14. Fixing Mistakes
+
+```bash
+git commit --amend -m "new message"
+git add file.txt
+git commit --amend --no-edit
+git revert <commit_hash>
+```
+
+---
+
+## 15. Daily Workflow
+
+```bash
+git pull
 git status
 git add .
-git commit -m "work"
+git commit -m "work update"
 git push
+```
 
-Switch task
+### Switch Task
+
+```bash
 git stash
-git switch other
+git switch other-branch
 git stash pop
+```
 
 ---
 
-16. GIT STATES MODEL
+## 16. Git States Model
+
+Working Directory → Staging Area → Local Repository → Remote Repository
 
 ---
 
-Working directory
-Staging area
-Local repository
-Remote repository
+## 17. Useful Aliases
 
-Commands move files between these areas
-
----
-
-17. ALIASES USEFUL
-
----
-
+```bash
 git config --global alias.st status
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.cm commit
 git config --global alias.lg "log --oneline --graph"
+```
 
 ---
 
-18. TROUBLESHOOT
+## 18. Troubleshooting
 
----
-
-Clean untracked files
+```bash
 git clean -n
 git clean -f
-
-Find bad commit
 git bisect start
-
-Undo pushed commit
-git revert <hash>
+git revert <commit_hash>
 git push
+```
 
 ---
 
-## END OF CHEATSHEET
-
-Save this file as GIT_CHEATSHEET.txt for quick reference
